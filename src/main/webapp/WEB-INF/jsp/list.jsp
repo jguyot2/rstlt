@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page
-	import="java.util.List,ch.pouet.randommusicshit.model.Song"%>
+	import="java.util.List,ch.pouet.rms.model.Song"%>
 <%
     List<Song> songs = (List<Song>) request.getAttribute("songs");
     String message =(String) request.getAttribute("message");
@@ -13,9 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">F
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="css/main.css" rel="stylesheet" media="screen">
+<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
@@ -55,7 +55,7 @@
 				    for (Song c : songs) {
 				%>
 				<tr>
-					<td><a href="<%=c.getUrl()%>">Lien</a> </td>
+					<td><a href="<%=c.getLink()%>">Lien</a> </td>
 					<td><%=c.getName()%></td>
 					<td><%=c.getSubmission()%></td>
 					<td><%=c.getSubmittedBy()%></td>

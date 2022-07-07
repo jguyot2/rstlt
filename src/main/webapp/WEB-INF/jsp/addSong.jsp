@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<%@ page import="com.excilys.model.CompanyDTO,java.util.List"%>
+<%@ page import="ch.pouet.rms.CompanyDTO,java.util.List"%>
 <%@ page isELIgnored="false" %>
 
 <c:set value="${requestScope.companyList}" var="companyList" />
@@ -14,9 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 
-<spring:url value="/resources/css/bootstrap.min.css" var="bootstrapStyle" />
-<spring:url value="/resources/css/font-awesome.css" var="fontAweSomeStyle" />
-<spring:url value="/resources/css/main.css" var="mainCss" />
+<spring:url value="/css/bootstrap.min.css" var="bootstrapStyle" />
+<spring:url value="/css/font-awesome.css" var="fontAweSomeStyle" />
+<spring:url value="/css/main.css" var="mainCss" />
 
 <link href="${bootstrapStyle}" rel="stylesheet" media="screen">
 <link href="${fontAweSomeStyle}" rel="stylesheet" media="screen">

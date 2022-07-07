@@ -1,21 +1,16 @@
-package ch.pouet.randommusicshit.controller;
+package ch.pouet.rms.controller;
 
-import ch.pouet.randommusicshit.model.Song;
-import ch.pouet.randommusicshit.service.SongService;
-import org.apache.coyote.Request;
+import ch.pouet.rms.model.Song;
+import ch.pouet.rms.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.net.http.HttpRequest;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Controller
@@ -40,7 +35,7 @@ public class RmsController {
 
     @PostMapping
     public String create(@RequestBody Song song) {
-        if(!urlRegexp.matcher(song.getUrl()).find())
+        if(!urlRegexp.matcher(song.getLink()).find())
             throw new RuntimeException();
         service.createSong(song);
         return "redirect:/list?message=ok";
