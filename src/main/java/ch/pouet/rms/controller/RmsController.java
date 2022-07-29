@@ -1,5 +1,6 @@
 package ch.pouet.rms.controller;
 
+import ch.pouet.rms.dto.AddedSongs;
 import ch.pouet.rms.model.Song;
 import ch.pouet.rms.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -19,6 +21,7 @@ public class RmsController {
 
     @Autowired
     SongService service;
+
     @GetMapping("/list")
     public String list(@RequestParam(required = false) final String message,
                        Model model) {
@@ -28,14 +31,35 @@ public class RmsController {
         return "list";
     }
 
-    @GetMapping("/addSong")
-    public String addPage(){
-        return "add";
+    @GetMapping("/add")
+    public String addPage() {
+        return "addSong";
+    }
+
+    @GetMapping("/addSeveral")
+    public String addSeveral() {
+        return "addSong";
+    }
+
+    @PostMapping("/add")
+    public String addSongs(@RequestBody AddedSongs addedSongs) {
+        String submittedBy = addedSongs.getSubmittedBy();
+        Instant now = Instant.now();
+        List<Song> songs =
+                addedSongs.getSongsUris().lines()
+                        .map(s -> Song.builder()
+                                .link(s)
+                                .submittedBy(submittedBy)
+                                .submission(now)
+                                .build())
+                        .toList();
+        service.createSongs(songs);
+        return "redirect:/list?message=ok";
     }
 
     @PostMapping
     public String create(@RequestBody Song song) {
-        if(!urlRegexp.matcher(song.getLink()).find())
+        if (!urlRegexp.matcher(song.getLink()).find())
             throw new RuntimeException();
         service.createSong(song);
         return "redirect:/list?message=ok";

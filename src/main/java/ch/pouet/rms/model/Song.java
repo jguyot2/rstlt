@@ -15,6 +15,8 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity(name = "song")
 @NoArgsConstructor
 public class Song {
