@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -20,6 +21,10 @@ public class SongService {
         return repository.save(song);
     }
 
+    public Optional<Song> findById(Long id) {
+        return repository.findById(id);
+    }
+
     public Song updateSong(Song song) {
         return repository.save(song);
     }
@@ -28,9 +33,10 @@ public class SongService {
         repository.saveAll(song);
     }
 
-    public void deleteSong(Long id){
+    public void deleteSong(Long id) {
         repository.deleteById(id);
     }
+
     public List<Song> getSongs() {
         List<Song> songs = new ArrayList<>();
         repository.findAll().forEach(songs::add);

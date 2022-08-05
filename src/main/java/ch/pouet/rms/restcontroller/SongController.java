@@ -39,9 +39,16 @@ public class SongController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> deleteSong(@PathVariable Long id) {
-         service.deleteSong(id);
-         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        // TOOO un peu de validation comme même
+        service.deleteSong(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{id}")
+    public Song getByID(@PathVariable Long id) {
+        // TODO un peu de gestion d'exception commême
+        return service.findById(id).orElseThrow(RuntimeException::new);
     }
 
 }
