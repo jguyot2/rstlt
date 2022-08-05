@@ -2,10 +2,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<%@ page import="ch.pouet.rms.CompanyDTO,java.util.List"%>
+<%@ page import="ch.pouet.rms.model.Song,java.util.List"%>
 <%@ page isELIgnored="false" %>
 
-<c:set value="${requestScope.companyList}" var="companyList" />
 
 <!DOCTYPE html>
 <html>
@@ -46,7 +45,7 @@
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2 box">
 					<h1>Add Song</h1>
-					<form name="addSong" action="addSong" method="POST"
+					<form name="add" action="add" method="POST"
 						onsubmit="return validateForm()">
 						<fieldset>
 							<div class="form-group">
@@ -54,9 +53,21 @@
 									type="text" class="form-control" id="url"
 									name="url" placeholder="url">
 							</div>
+							<div class="form-group">
+                                <label for="submittedBy"> submittedBy </label>
+                                <input
+                                    type="text" class="form-control" id="submittedBy"
+                                    name="submittedBy" placeholder="submittedBy">
+                            </div>
+                             <div class="form-group">
+							    <label for="name"> name </label>
+							    <input
+                                    type="text" class="form-control" id="name"
+    						        name="name" placeholder="name">
+    						</div>
 						</fieldset>
 						<div class="actions pull-right">
-							<input type="submit" value="Add" class="btn btn-primary">
+							<input type="submit" value="add" class="btn btn-primary">
 							or <a href="page" class="btn btn-default">Cancel</a>
 						</div>
 					</form>

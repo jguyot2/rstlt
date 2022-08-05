@@ -1,6 +1,6 @@
 package ch.pouet.rms.controller;
 
-import ch.pouet.rms.dto.AddedSongs;
+
 import ch.pouet.rms.model.Song;
 import ch.pouet.rms.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.regex.Pattern;
+
 
 @Controller
 public class RmsController {
@@ -42,26 +42,15 @@ public class RmsController {
     }
 
     @PostMapping("/add")
-    public String addSongs(@RequestBody AddedSongs addedSongs) {
-        String submittedBy = addedSongs.getSubmittedBy();
-        Instant now = Instant.now();
-        List<Song> songs =
-                addedSongs.getSongsUris().lines()
-                        .map(s -> Song.builder()
-                                .link(s)
-                                .submittedBy(submittedBy)
-                                .submission(now)
-                                .build())
-                        .toList();
-        service.createSongs(songs);
+    public String addSongs(@RequestParam String url,
+                           @RequestParam String submittedBy,
+                           @RequestParam(required = false) String name) {
+        service.createSong(Song.builder().link(url)
+                .submittedBy(submittedBy)
+                .name(name)
+                .submission(Instant.now())
+                .build());
         return "redirect:/list?message=ok";
     }
 
-    @PostMapping
-    public String create(@RequestBody Song song) {
-        if (!urlRegexp.matcher(song.getLink()).find())
-            throw new RuntimeException();
-        service.createSong(song);
-        return "redirect:/list?message=ok";
-    }
 }

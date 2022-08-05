@@ -28,7 +28,7 @@
 	<div class="container">
 		<div id="actions" class="form-horizontal">
 			<div class="pull-right">
-				<a class="btn btn-success" id="addSong" href="addSong">TODO : Add song</a>
+				<a class="btn btn-success" id="addSong" href="/add">Add song</a>
 			</div>
 		</div>
 	</div>
