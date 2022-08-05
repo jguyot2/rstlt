@@ -1,4 +1,4 @@
-package ch.pouet.randommusicshit.model;
+package ch.pouet.rms.model;
 
 
 import lombok.*;
@@ -15,14 +15,16 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
+@Builder
+@AllArgsConstructor
+@Entity(name = "song")
 @NoArgsConstructor
 public class Song {
     @Id
     private Long id;
     @NonNull
     @lombok.NonNull
-    private String url;
+    private String link;
     @Nullable
     private String name;
     @Nullable
