@@ -26,7 +26,7 @@
 	function validateForm() {
 		var form = document.forms["addSong"];
 		var name = form["url"].value;
-		if (url.trim() == "") {
+		if (url.trim() === "") {
 			alert("Pas d'url");
 			console.log("no name");
 			return false;
