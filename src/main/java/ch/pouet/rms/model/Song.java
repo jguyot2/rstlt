@@ -1,6 +1,8 @@
 package ch.pouet.rms.model;
 
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.lang.NonNull;
@@ -22,6 +24,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity(name = "song")
 @NoArgsConstructor
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
